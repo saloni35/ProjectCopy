@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.acer.project.FindFriendsActivity">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter username"
+        android:textSize="10dp"
+        android:id="@+id/find_user_by_name"/>
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="Find Friend"
+        android:textSize="10dp"
+        android:id="@+id/find_user_by_name_button"
+        android:layout_below="@id/find_user_by_name"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/find_friend_list"
+        android:layout_below="@id/find_user_by_name_button">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

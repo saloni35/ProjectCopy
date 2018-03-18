@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.acer.project.SignUpActivity">
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/emailid_signup_edittext"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:textSize="20sp"
+        android:background="@drawable/edit_text_background"
+        android:gravity="center"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="5dp"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/password_signup_edittext"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:textSize="20sp"
+        android:background="@drawable/edit_text_background"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/emailid_signup_edittext"/>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/signup_button"
+        android:text="Sign Up"
+        android:textSize="20sp"
+        android:background="@drawable/button"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/password_signup_edittext"/>
+
+</RelativeLayout>

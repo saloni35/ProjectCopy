@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#41b4b6</color>
+    <color name="colorPrimaryDark">#b9050712</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="btnColour">#cd2a9e98</color>
+    <color name="borderColour">#cdc7bfc1</color>
+    <color name="edittextColour">#cde7e3e4</color>
+    <color name="drawerColor">#3bafb1</color>
+    <color name="tryColour">#155b8e</color>
+</resources>

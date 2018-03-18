@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.acer.project.ProfilePageActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/profile_pic_view"
+        android:src="@mipmap/ic_account_circle_black_48dp"
+        android:layout_marginRight="30dp"/>
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/status_edit"
+        android:hint="Status"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/profile_pic_view"
+        android:textSize="20sp"/>
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/name_edit"
+        android:hint="Name"
+        android:textSize="20sp"
+        android:background="@drawable/edit_text_background"
+        android:layout_below="@id/status_edit"
+        android:layout_marginBottom="10dp"/>
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/native_edit"
+        android:hint="Native Place"
+        android:textSize="20sp"
+        android:background="@drawable/edit_text_background"
+        android:layout_below="@id/name_edit"
+        android:layout_marginBottom="10dp"/>
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/hobbies_edit"
+        android:hint="Hobbies"
+        android:textSize="20sp"
+        android:background="@drawable/edit_text_background"
+        android:layout_below="@id/native_edit"
+        android:layout_marginBottom="10dp"/>
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/age_edit"
+        android:hint="Age"
+        android:textSize="20sp"
+        android:background="@drawable/edit_text_background"
+        android:layout_below="@id/hobbies_edit"
+        android:layout_marginBottom="10dp"/>
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/query1_edit"
+        android:hint="Are u a part of any travel group?"
+        android:textSize="20sp"
+        android:background="@drawable/edit_text_background"
+        android:layout_below="@id/age_edit"
+        android:layout_marginBottom="10dp"/>
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/query2_edit"
+        android:hint="Reason behind finding travel partner"
+        android:textSize="20sp"
+        android:background="@drawable/edit_text_background"
+        android:layout_below="@id/query1_edit"
+        android:layout_marginBottom="10dp"/>
+    <Button
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/update_button"
+        android:text="Update"
+        android:textSize="20sp"
+        android:background="@drawable/button"
+        android:layout_below="@id/query2_edit"/>
+
+</RelativeLayout>

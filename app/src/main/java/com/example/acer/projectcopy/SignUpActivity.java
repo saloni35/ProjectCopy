@@ -1,4 +1,4 @@
-package com.example.acer.project;
+package com.example.acer.projectcopy;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -25,8 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import static com.example.acer.project.R.mipmap.ic_account_circle_black_48dp;
-
 public class SignUpActivity extends AppCompatActivity {
 
     private static final String TAG = "";
@@ -37,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     private ProgressDialog dialog;
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
+    private FirebaseStorage firebaseStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
 
         emailid = (EditText) findViewById(R.id.emailid_signup_edittext);
         password = (EditText) findViewById(R.id.password_signup_edittext);
@@ -120,6 +120,10 @@ public class SignUpActivity extends AppCompatActivity {
                                     databaseReference.child("user_status").setValue("Hey there, i am using travello");
                                     databaseReference.child("user_image").setValue("default_profile");
                                     databaseReference.child("user_thumb_image").setValue("default_image");
+                                    databaseReference.child("user_name").setValue(" ");
+                                    databaseReference.child("user_native_place").setValue(" ");
+                                    storageReference = firebaseStorage.getReference().child("User_Images");
+                                    storageReference = firebaseStorage.getReference().child("User_Thumb_Images");
                                     Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);

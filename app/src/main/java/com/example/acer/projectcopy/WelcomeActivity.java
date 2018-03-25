@@ -1,4 +1,4 @@
-package com.example.acer.project;
+package com.example.acer.projectcopy;
 
 import android.content.Intent;
 import android.graphics.Color;

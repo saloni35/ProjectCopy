@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "260740584283",
-    "firebase_url": "https://project-9623c.firebaseio.com",
-    "project_id": "project-9623c",
-    "storage_bucket": "project-9623c.appspot.com"
+    "project_number": "629752805866",
+    "firebase_url": "https://projectcopy-8997d.firebaseio.com",
+    "project_id": "projectcopy-8997d",
+    "storage_bucket": "projectcopy-8997d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:260740584283:android:695c855b21534853",
+        "mobilesdk_app_id": "1:629752805866:android:2781a5f2ddbb6105",
         "android_client_info": {
-          "package_name": "com.example.acer.project"
+          "package_name": "com.example.acer.projectcopy"
         }
       },
       "oauth_client": [
         {
-          "client_id": "260740584283-7iftukkaj5gbvjmhkgdom77u43t8u3ft.apps.googleusercontent.com",
+          "client_id": "629752805866-cil9enjb257vcka9f49nakd8gds68pe7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.acer.project",
+            "package_name": "com.example.acer.projectcopy",
             "certificate_hash": "dd2761dda7fa6c58010452ea95e7f90a48160246"
           }
         },
         {
-          "client_id": "260740584283-27h3kjhfn7ig9568g5jeeqtdhuvnkbe1.apps.googleusercontent.com",
+          "client_id": "629752805866-pf46q6pkkachv434rpm8gaqo2ns55qsl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6ZzyRork7K1g_Oyatf5qLbmRUU5XKmmQ"
+          "current_key": "AIzaSyDAeIhznUmIwxyf_b-HSMIQ2eeK7wK1X54"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "260740584283-27h3kjhfn7ig9568g5jeeqtdhuvnkbe1.apps.googleusercontent.com",
+              "client_id": "629752805866-pf46q6pkkachv434rpm8gaqo2ns55qsl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

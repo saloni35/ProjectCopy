@@ -1,4 +1,4 @@
-package com.example.acer.project;
+package com.example.acer.projectcopy;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

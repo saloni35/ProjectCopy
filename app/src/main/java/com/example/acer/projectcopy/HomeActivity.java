@@ -1,4 +1,4 @@
-package com.example.acer.project;
+package com.example.acer.projectcopy;
 
 import android.content.res.Configuration;
 import android.os.PersistableBundle;
@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout)findViewById(R.id.navigation_drawer);
         navigationView=(NavigationView)findViewById(R.id.navigation_view);
 
-        final ProfilePageFragment pf=new ProfilePageFragment();
+        final ProfileFragment pf=new ProfileFragment();
         final FindFriendsFragment ff=new FindFriendsFragment();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

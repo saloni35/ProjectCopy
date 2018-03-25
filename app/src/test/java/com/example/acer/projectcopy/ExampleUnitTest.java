@@ -1,4 +1,4 @@
-package com.example.acer.project;
+package com.example.acer.projectcopy;
 
 import org.junit.Test;
 

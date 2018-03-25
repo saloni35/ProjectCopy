@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.acer.projectcopy.ProfilePageFragment">
+    tools:context="com.example.acer.projectcopy.ProfileFragment">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -11,31 +11,31 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/profile_pic_view"
+            android:id="@+id/profile_pic_view_l"
             android:src="@mipmap/ic_account_circle_black_48dp"
             android:layout_margin="10dp"
             />
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/name_edit"
+            android:id="@+id/name_edit_l"
             android:hint="Username"
             android:textSize="20sp"
             android:background="@drawable/edit_text_background"
-            android:layout_toEndOf="@+id/profile_pic_view"
-            android:layout_toRightOf="@id/profile_pic_view"
+            android:layout_toEndOf="@+id/profile_pic_view_l"
+            android:layout_toRightOf="@id/profile_pic_view_l"
             android:layout_margin="10dp"/>
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/native_edit"
+            android:id="@+id/native_edit_l"
             android:hint="Native Place"
             android:textSize="20sp"
             android:background="@drawable/edit_text_background"
-            android:layout_alignStart="@id/name_edit"
-            android:layout_toEndOf="@+id/profile_pic_view"
-            android:layout_toRightOf="@id/profile_pic_view"
-            android:layout_below="@id/name_edit"
+            android:layout_alignStart="@id/name_edit_l"
+            android:layout_toEndOf="@+id/profile_pic_view_l"
+            android:layout_toRightOf="@id/profile_pic_view_l"
+            android:layout_below="@id/name_edit_l"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
@@ -43,14 +43,14 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/hobbies_edit"
+            android:id="@+id/hobbies_edit_l"
             android:hint="Hobbies"
             android:textSize="20sp"
             android:background="@drawable/edit_text_background"
-            android:layout_toEndOf="@+id/profile_pic_view"
-            android:layout_toRightOf="@id/profile_pic_view"
-            android:layout_below="@id/native_edit"
-            android:layout_alignStart="@id/name_edit"
+            android:layout_toEndOf="@+id/profile_pic_view_l"
+            android:layout_toRightOf="@id/profile_pic_view_l"
+            android:layout_below="@id/native_edit_l"
+            android:layout_alignStart="@id/name_edit_l"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
@@ -58,12 +58,12 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/age_edit"
+            android:id="@+id/age_edit_l"
             android:hint="Age"
             android:textSize="20sp"
             android:background="@drawable/edit_text_background"
-            android:layout_below="@id/hobbies_edit"
-            android:layout_alignStart="@id/name_edit"
+            android:layout_below="@id/hobbies_edit_l"
+            android:layout_alignStart="@id/name_edit_l"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
@@ -71,43 +71,42 @@
         <EditText
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/status_edit"
+            android:id="@+id/status_edit_l"
             android:hint="Status"
             android:background="@drawable/edit_text_background"
             android:layout_margin="10dp"
-            android:layout_below="@id/age_edit"
-            android:layout_alignLeft="@id/profile_pic_view"
+            android:layout_below="@id/age_edit_l"
+            android:layout_alignLeft="@id/profile_pic_view_l"
             android:textSize="20sp"/>
 
         <EditText
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:id="@+id/query1_edit"
+            android:id="@+id/query1_edit_l"
             android:hint="Are u a part of any travel group?"
             android:textSize="20sp"
             android:background="@drawable/edit_text_background"
-            android:layout_below="@id/status_edit"
+            android:layout_below="@id/status_edit_l"
             android:layout_margin="10dp"/>
         <EditText
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:id="@+id/query2_edit"
+            android:id="@+id/query2_edit_l"
             android:hint="Reason behind finding travel partner"
             android:textSize="20sp"
             android:background="@drawable/edit_text_background"
-            android:layout_below="@id/query1_edit"
+            android:layout_below="@id/query1_edit_l"
             android:layout_margin="10dp"/>
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/update_button"
+            android:id="@+id/update_button_l"
             android:text="Update"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/button"
-            android:layout_below="@id/query2_edit"/>
+            android:layout_below="@id/query2_edit_l"/>
 
     </RelativeLayout>
-
 
 </FrameLayout>

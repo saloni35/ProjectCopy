@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.acer.project">
+    package="com.example.acer.projectcopy">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".WelcomeActivity"
+            android:name="com.example.acer.projectcopy.WelcomeActivity"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,13 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".StartActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".ProfilePageActivity" />
-        <activity android:name=".FindFriendsActivity" />
-        <activity android:name=".OtherUserProfileActivity"></activity>
+        <activity android:name="com.example.acer.projectcopy.HomeActivity" />
+        <activity android:name="com.example.acer.projectcopy.LoginActivity" />
+        <activity android:name="com.example.acer.projectcopy.StartActivity" />
+        <activity android:name="com.example.acer.projectcopy.SignUpActivity" />
+        <activity android:name="com.example.acer.projectcopy.ProfilePageActivity" />
+        <activity android:name="com.example.acer.projectcopy.FindFriendsActivity" />
+        <activity android:name="com.example.acer.projectcopy.OtherUserProfileActivity"></activity>
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
     </application>

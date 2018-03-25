@@ -1,4 +1,4 @@
-package com.example.acer.project;
+package com.example.acer.projectcopy;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

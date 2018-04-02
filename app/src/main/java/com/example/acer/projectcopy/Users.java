@@ -10,6 +10,7 @@ public class Users {
     private String user_status;
     private String user_image;
     private String user_thumb_image;
+    private String user_native_place;
 
     public Users()
     {
@@ -53,6 +54,14 @@ public class Users {
 
     public void setUser_thumb_image(String user_thumb_image) {
         this.user_thumb_image = user_thumb_image;
+    }
+
+    public String getUser_native_place() {
+        return user_native_place;
+    }
+
+    public void setUser_native_place(String user_native_place) {
+        this.user_native_place = user_native_place;
     }
 }
 

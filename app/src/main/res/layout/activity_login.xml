@@ -1,46 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.acer.projectcopy.LoginActivity">
 
     <EditText
+        android:id="@+id/emailid_login_edittext"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:id="@+id/emailid_login_edittext"
-        android:inputType="textEmailAddress"
-        android:hint="Email"
-        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="150dp"
         android:background="@drawable/edit_text_background"
         android:gravity="center"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="5dp"
-        android:layout_centerHorizontal="true"/>
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/password_login_edittext"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:id="@+id/password_login_edittext"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:textSize="20sp"
+        android:layout_below="@id/emailid_login_edittext"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
         android:background="@drawable/edit_text_background"
         android:gravity="center"
-        android:layout_margin="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/emailid_login_edittext"/>
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="20sp" />
 
     <Button
+        android:id="@+id/login_button"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:id="@+id/login_button"
-        android:text="Login"
-        android:textSize="20sp"
-        android:background="@drawable/button"
-        android:layout_margin="5dp"
+        android:layout_below="@id/password_login_edittext"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/password_login_edittext"/>
+        android:layout_margin="5dp"
+        android:background="@drawable/button"
+        android:text="Login"
+        android:textSize="20sp" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/fb_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp" />
+
 
 </RelativeLayout>

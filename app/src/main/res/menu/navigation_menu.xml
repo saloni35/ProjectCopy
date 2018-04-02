@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <group android:checkableBehavior="single">
-    <item android:title="Profile"
-        android:icon="@mipmap/ic_account_circle_black_48dp"
-        android:id="@+id/profile_navigation_item"/>
-    <item android:title="Newsfeed"
-        android:id="@+id/newsfeed_navigation_item" />
-    <item android:title="Friends"
-        android:id="@+id/friends_navigation_item"/>
-    <item android:title="Groups"
-        android:id="@+id/groups_navigation_item"/>
-    <item android:title="Privacy Settings"
-        android:id="@+id/privacy_settings_item"/>
-    <item android:title="Your Plans"
-        android:id="@+id/your_plan_item"/>
-    <item android:title="Invite Friends"
-        android:id="@+id/invite_friend_item"/>
-    <item android:title="Add Account"
-        android:id="@+id/add_account_item"/>
+    <item
+        android:id="@+id/profile_navigation_item"
+        android:title=""
+        app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
+    <item
+        android:id="@+id/newsfeed_navigation_item"
+        android:title=""
+        app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
+    <item
+        android:id="@+id/facebook_friends_item"
+        android:title=""
+        app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
+    <item
+        android:id="@+id/friends_navigation_item"
+        android:title=""
+        app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
+    <item
+        android:id="@+id/groups_navigation_item"
+        android:title=""
+        app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
+    <item
+        android:id="@+id/privacy_settings_item"
+        android:title=""
+        app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
+    <item
+        android:id="@+id/your_plan_item"
+        android:title=""
+        app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
+    <item
+        android:id="@+id/invite_friend_item"
+        android:title=""
+        app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
+    <item
+        android:id="@+id/add_account_item"
+        android:title=""
+        app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
 </group>
 </menu>

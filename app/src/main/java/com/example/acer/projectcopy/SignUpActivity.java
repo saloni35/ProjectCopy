@@ -6,11 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -97,7 +98,7 @@ public class SignUpActivity extends AppCompatActivity {
         alert.show();
     }
 
-    private void signupUser(String email, String pswd) {
+    private void signupUser(final String email, String pswd) {
         final String emailid=email;
         final String password=pswd;
         if(email==null || pswd==null)
@@ -120,8 +121,9 @@ public class SignUpActivity extends AppCompatActivity {
                                     databaseReference.child("user_status").setValue("Hey there, i am using travello");
                                     databaseReference.child("user_image").setValue("default_profile");
                                     databaseReference.child("user_thumb_image").setValue("default_image");
-                                    databaseReference.child("user_name").setValue(" ");
-                                    databaseReference.child("user_native_place").setValue(" ");
+                                    String name[] = emailid.split("@");
+                                    databaseReference.child("user_name").setValue(name[0]);
+                                    databaseReference.child("user_native_place").setValue("Default India");
                                     storageReference = firebaseStorage.getReference().child("User_Images");
                                     storageReference = firebaseStorage.getReference().child("User_Thumb_Images");
                                     Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
@@ -129,7 +131,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(SignUpActivity.this, "Error occured", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpActivity.this, "Cannot Create Account: " + task.getException().getMessage() + " Cause: " + task.getException().getCause(), Toast.LENGTH_SHORT).show();
                                 }
                                 dialog.dismiss();
                             }

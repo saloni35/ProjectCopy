@@ -20,6 +20,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -99,11 +103,12 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void signupUser(final String email, String pswd) {
-        final String emailid=email;
-        final String password=pswd;
-        if(email==null || pswd==null)
-        {
-            Toast.makeText(SignUpActivity.this,"One of the fields empty",Toast.LENGTH_SHORT).show();
+        final String email_id = email;
+        final String pass = pswd;
+        if (email == null) {
+            emailid.setError("Cannot keep this field empty");
+        } else if (pswd == null) {
+            password.setError("Cannot keep this field empty");
         }
         else {
             if (isConnected(SignUpActivity.this)) {
@@ -117,13 +122,15 @@ public class SignUpActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     String current_user_id = mAuth.getCurrentUser().getUid();
                                     databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(current_user_id);
-                                    databaseReference.child("user_emailid").setValue(emailid);
+                                    databaseReference.child("user_emailid").setValue(email_id);
                                     databaseReference.child("user_status").setValue("Hey there, i am using travello");
                                     databaseReference.child("user_image").setValue("default_profile");
                                     databaseReference.child("user_thumb_image").setValue("default_image");
-                                    String name[] = emailid.split("@");
+                                    String name[] = email_id.split("@");
                                     databaseReference.child("user_name").setValue(name[0]);
                                     databaseReference.child("user_native_place").setValue("Default India");
+                                    databaseReference.child("user_age").setValue(0);
+                                    databaseReference.child("user_hobbies").setValue("");
                                     storageReference = firebaseStorage.getReference().child("User_Images");
                                     storageReference = firebaseStorage.getReference().child("User_Thumb_Images");
                                     Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
@@ -131,6 +138,19 @@ public class SignUpActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 } else {
+                                    try {
+                                        throw task.getException();
+                                    } catch (FirebaseAuthWeakPasswordException e) {
+                                        Toast.makeText(SignUpActivity.this, "Weak Password:Minimum 6 characters required", Toast.LENGTH_SHORT).show();
+                                    } catch (FirebaseAuthEmailException e) {
+                                        Toast.makeText(SignUpActivity.this, "Invalid Email id", Toast.LENGTH_SHORT).show();
+                                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                                        Toast.makeText(SignUpActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                                    } catch (FirebaseAuthUserCollisionException e) {
+                                        Toast.makeText(SignUpActivity.this, "User already exists with this email id", Toast.LENGTH_SHORT).show();
+                                    } catch (Exception e) {
+
+                                    }
                                     Toast.makeText(SignUpActivity.this, "Cannot Create Account: " + task.getException().getMessage() + " Cause: " + task.getException().getCause(), Toast.LENGTH_SHORT).show();
                                 }
                                 dialog.dismiss();

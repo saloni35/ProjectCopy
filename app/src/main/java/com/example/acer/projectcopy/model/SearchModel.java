@@ -7,15 +7,20 @@ package com.example.acer.projectcopy.model;
 public class SearchModel {
 
     private long mId;
+    private String mUserId;
     private String mImageURL;
     private String mText;
     private String mOtherText;
+    private String mNativeText;
+    private String mAgeText;
+    private String mHobbies;
 
     public SearchModel() {
     }
 
-    public SearchModel(long id, String imageURL, String text, String otherText) {
+    public SearchModel(long id, String userId, String imageURL, String text, String otherText) {
         mId = id;
+        mUserId = userId;
         mImageURL = imageURL;
         mText = text;
         mOtherText = otherText;
@@ -57,5 +62,37 @@ public class SearchModel {
 
     public void setOtherText(String otherText) {
         mOtherText = otherText;
+    }
+
+    public String getUserId() {
+        return mUserId;
+    }
+
+    public void setUserId(String mUserId) {
+        this.mUserId = mUserId;
+    }
+
+    public String getNativeText() {
+        return mNativeText;
+    }
+
+    public void setNativeText(String mNativeText) {
+        this.mNativeText = mNativeText;
+    }
+
+    public String getAgeText() {
+        return mAgeText;
+    }
+
+    public void setAgeText(String mAgeText) {
+        this.mAgeText = mAgeText;
+    }
+
+    public String getHobbies() {
+        return mHobbies;
+    }
+
+    public void setHobbies(String mHobbies) {
+        this.mHobbies = mHobbies;
     }
 }

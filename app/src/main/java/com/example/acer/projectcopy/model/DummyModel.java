@@ -8,6 +8,7 @@ public class DummyModel {
     private int mIconRes;
 
     public DummyModel() {
+        mId++;
     }
 
     public DummyModel(long id, String imageURL, String text, int iconRes) {

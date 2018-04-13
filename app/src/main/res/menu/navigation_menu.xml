@@ -19,24 +19,21 @@
         android:title=""
         app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
     <item
-        android:id="@+id/groups_navigation_item"
+        android:id="@+id/plan_create_navigation_item"
         android:title=""
         app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
     <item
-        android:id="@+id/privacy_settings_item"
+        android:id="@+id/plan_show_navigation_item"
         android:title=""
         app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
     <item
-        android:id="@+id/your_plan_item"
+        android:id="@+id/post_create_navigation_item"
         android:title=""
         app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
     <item
-        android:id="@+id/invite_friend_item"
+        android:id="@+id/my_plans_navigation_item"
         android:title=""
         app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
-    <item
-        android:id="@+id/add_account_item"
-        android:title=""
-        app:actionLayout="@layout/list_view_item_navigation_drawer_layout" />
+
 </group>
 </menu>

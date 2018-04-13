@@ -1,6 +1,7 @@
 package com.example.acer.projectcopy;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +28,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -98,10 +96,12 @@ public class ProfilePageFragment extends Fragment {
 //                String usr_native=dataSnapshot.child("user_native_place").getValue().toString();
                 String usr_image=dataSnapshot.child("user_image").getValue().toString();
                 String usr_thumb_image=dataSnapshot.child("user_thumb_image").getValue().toString();
+                String usr_native = dataSnapshot.child("user_native_place").getValue().toString();
 
                 statusEdit.setText(usr_status);
 //                nativePlaceEdit.setText(usr_native);
                 usernameEdit.setText(usr_name);
+                nativePlaceEdit.setText(usr_native);
 
                 if(!usr_image.equals("default_image")) {
                    // Picasso.with(mActivity).load(usr_image).placeholder(R.mipmap.ic_account_circle_black_48dp).into(userProfileImage);
@@ -121,7 +121,7 @@ public class ProfilePageFragment extends Fragment {
             public void onClick(View v) {
                 databaseReference.child("user_status").setValue(statusEdit.getText().toString());
                 databaseReference.child("user_name").setValue(usernameEdit.getText().toString());
- //               databaseReference.child("user_native_place").setValue(nativePlaceEdit.getText().toString());
+                databaseReference.child("user_native_place").setValue(nativePlaceEdit.getText().toString());
 
             }
         });

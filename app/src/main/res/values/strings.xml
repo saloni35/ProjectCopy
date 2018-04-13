@@ -8,21 +8,22 @@
     <string name="facebook_app_id">184961528959535</string>
     <string name="fb_login_protocol_scheme">fb184961528959535</string>
 
-    <string name="drawer_icon_splash_screens">&#xe862;</string>
-    <string name="drawer_icon_progress_bars">&#xeaab;</string>
+    <string name="drawer_icon_create_post">&#xE873;</string>
+    <string name="drawer_icon_invite_friends">&#xeaab;</string>
     <!-- <string name="drawer_icon_buttons">&#xe802;</string> -->
-    <string name="drawer_icon_shape_image_views">&#xe8d6;</string>
+    <string name="drawer_icon_show_plans">&#xE86D;</string>
     <string name="drawer_icon_text_views">&#xe93f;</string>
     <string name="drawer_icon_search_bars">&#xea01;</string>
-    <string name="drawer_icon_login_page">&#xe9f7;</string>
+    <string name="drawer_icon_friends">&#xE8B6;</string>
+
     <!-- <string name="drawer_icon_audio_player">&#xe807;</string> -->
     <!-- <string name="drawer_icon_video_player">&#xe808;</string> -->
-    <string name="drawer_icon_image_gallery">&#xeb42;</string>
-    <string name="drawer_icon_check_and_radio_buttons">&#xe86f;</string>
+    <string name="drawer_icon_create_plans">&#xE85D;</string>
+    <string name="drawer_icon_add_account">&#xe86f;</string>
     <!-- <string name="drawer_icon_calendars">&#xe811;</string> -->
-    <string name="drawer_icon_left_menus">&#xe9fb;</string>
-    <string name="drawer_icon_list_views">&#xeb41;</string>
-    <string name="drawer_icon_parallax">&#xeb6b;</string>
+    <string name="drawer_icon_facebook_friends">&#xE8D3;</string>
+    <string name="drawer_icon_profile">&#xeb41;</string>
+    <string name="drawer_icon_newsfeed">&#xE86D;</string>
     <string name="drawer_icon_dialogs">&#xea5b;</string>
     <string name="drawer_icon_tabs">&#xeb3b;</string>
     <string name="drawer_icon_wizards">&#xe861;</string>
@@ -32,21 +33,21 @@
     <string name="drawer_icon_instagram">&#xe9f5;</string>
 
     <!-- Navigation Drawer icon titles -->
-    <string name="drawer_title_splash_screens">Splash Screens</string>
-    <string name="drawer_title_progress_bars">Progress Bars</string>
+    <string name="drawer_title_create_post">Splash Screens</string>
+    <string name="drawer_title_invite_friends">Progress Bars</string>
     <!-- <string name="drawer_title_buttons">Buttons</string> -->
-    <string name="drawer_title_shape_image_views">Shape Image Views</string>
+    <string name="drawer_title_show_plans">Shape Image Views</string>
     <string name="drawer_title_text_views">Text Views</string>
     <string name="drawer_title_search_bars">Search Bars</string>
-    <string name="drawer_title_login_page">Login Pages</string>
+    <string name="drawer_title_friends">Friends</string>
     <!-- <string name="drawer_title_audio_player">Audio Player</string> -->
     <!-- <string name="drawer_title_video_player">Video Player</string> -->
-    <string name="drawer_title_image_gallery">Image Gallery</string>
-    <string name="drawer_title_check_and_radio_buttons">Check Boxes</string>
+    <string name="drawer_title_create_plans">Create Plans</string>
+    <string name="drawer_title_add_account">Check Boxes</string>
     <!-- <string name="drawer_title_calendars">Calendars</string> -->
-    <string name="drawer_title_left_menus">Left Menus</string>
-    <string name="drawer_title_list_views">List Views</string>
-    <string name="drawer_title_parallax">Parallax</string>
+    <string name="drawer_title_facebook_friends">Facebook Friends</string>
+    <string name="drawer_title_profile">Profile</string>
+    <string name="drawer_title_newsfeed">Newsfeed</string>
     <string name="drawer_title_dialogs">Dialogs</string>
     <string name="drawer_title_tabs">Tabs</string>
     <string name="drawer_title_wizards">Wizards</string>
@@ -185,6 +186,14 @@
     <string name="mailchimp_list_id"></string>
     <string name="server_num"></string>
     <string name="mailchimp_key"></string>
+
+
+    <string name="now_time_range">now</string>
+
+    <string name="duration_minutes_shortest">%1$d m</string>
+    <string name="duration_hours_shortest">%1$d h</string>
+    <string name="duration_days_shortest">%1$d d</string>
+    <string name="duration_week_shortest">%1$d w</string>
 
     <string name="default_image_url">https://www.google.co.in/url?sa=i&amp;rct=j&amp;q=&amp;esrc=s&amp;source=images&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwjYlvLV4JnaAhXLwI8KHcQuBzMQjRx6BAgAEAU&amp;url=https%3A%2F%2Fwww.puriindahmall.co.id%2Fassets%2Fimg%2F%3FDD&amp;psig=AOvVaw3O-zisU7H-vKTN-bFL8S52&amp;ust=1522695404304827</string>
 

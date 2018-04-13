@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.example.acer.projectcopy.font.RobotoTextView
+        android:id="@+id/show_plan_child_source"
+        style="@style/TextViewAppearance.Title3" />
+
+    <com.example.acer.projectcopy.font.RobotoTextView
+        android:id="@+id/show_plan_child_destination"
+        style="@style/TextViewAppearance.Title3" />
+
+    <com.example.acer.projectcopy.font.RobotoTextView
+        android:id="@+id/show_plan_child_all_places"
+        style="@style/TextViewAppearance.Title3" />
+
+    <com.example.acer.projectcopy.font.RobotoTextView
+        android:id="@+id/show_plan_child_days"
+        style="@style/TextViewAppearance.Title3" />
+
+    <com.example.acer.projectcopy.font.RobotoTextView
+        android:id="@+id/show_plan_child_budget"
+        style="@style/TextViewAppearance.Title3" />
+
+    <com.example.acer.projectcopy.font.RobotoTextView
+        android:id="@+id/show_plan_child_trip_type"
+        style="@style/TextViewAppearance.Title3" />
+
+    <com.example.acer.projectcopy.font.RobotoTextView
+        android:id="@+id/show_plan_child_partner_desc"
+        style="@style/TextViewAppearance.Title3" />
+
+</LinearLayout>

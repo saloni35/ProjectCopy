@@ -146,7 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:contentDescription="@string/cd_main_image"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/background_small" />
 
         <LinearLayout

@@ -3,6 +3,7 @@ package com.example.acer.projectcopy;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -43,8 +45,8 @@ public class SearchFriendsFragment extends Fragment {
 
     private TextView mName;
     private TextView mNativePlace;
-    private TextView mArtist;
-    private TextView mGenre;
+    private TextView mAge;
+    private TextView mHobbies;
 
     private TextView mArrow;
     private LinearLayout mFiltersLayout;
@@ -54,19 +56,24 @@ public class SearchFriendsFragment extends Fragment {
     private ListView listView;
 
     private boolean searchByName = true;
-    private boolean searchByNativePlace = false;
+
 
     public SearchFriendsFragment() {
         // Required empty public constructor
-        searchFriendsFragment = this;
+        //searchFriendsFragment = this;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(mActivity));
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(mActivity));
+
 
         return inflater.inflate(R.layout.fragment_search_friends, container, false);
     }
@@ -90,8 +97,8 @@ public class SearchFriendsFragment extends Fragment {
 
         mName = (TextView) mActivity.findViewById(R.id.activity_search_bar_name);
         mNativePlace = (TextView) mActivity.findViewById(R.id.activity_search_bar_native_place);
-        mArtist = (TextView) mActivity.findViewById(R.id.activity_search_bar_media_artist);
-        mGenre = (TextView) mActivity.findViewById(R.id.activity_search_bar_media_genre);
+        mAge = (TextView) mActivity.findViewById(R.id.activity_search_bar_age);
+        mHobbies = (TextView) mActivity.findViewById(R.id.activity_search_bar_hobbies);
 
         mArrow = (TextView) mActivity.findViewById(R.id.activity_search_bar_media_arrow);
         mFiltersLayout = (LinearLayout) mActivity.findViewById(R.id.activity_search_bar_media_filters_layout);
@@ -109,13 +116,13 @@ public class SearchFriendsFragment extends Fragment {
                 afterClick(view);
             }
         });
-        mArtist.setOnClickListener(new OnClickListener() {
+        mAge.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 afterClick(view);
             }
         });
-        mGenre.setOnClickListener(new OnClickListener() {
+        mHobbies.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 afterClick(view);
@@ -131,13 +138,14 @@ public class SearchFriendsFragment extends Fragment {
         mSearchField = (EditText) mActivity.findViewById(R.id.search_field);
         mXMark = (TextView) mActivity.findViewById(R.id.search_x);
         mMicrofon = mActivity.findViewById(R.id.search_microfon);
-        mListView = (ListView) mActivity.findViewById(R.id.list_view);
+        mListView = (ListView) view.findViewById(R.id.list_view);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
         databaseReference.keepSynced(true);
         final ArrayList<SearchModel> list = new ArrayList<>();
 
         databaseReference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;
@@ -145,7 +153,11 @@ public class SearchFriendsFragment extends Fragment {
 
                     Users user = childSnapshot.getValue(Users.class);
 
-                    SearchModel searchModel = new SearchModel(i, user.getUser_image(), user.getUser_name(), user.getUser_native_place());
+                    SearchModel searchModel = new SearchModel(i, childSnapshot.getKey(), user.getUser_image(), user.getUser_name(), user.getUser_native_place());
+
+                    searchModel.setNativeText(user.getUser_native_place());
+                    searchModel.setAgeText(user.getUser_age().toString());
+                    searchModel.setHobbies(user.getUser_hobbies());
 
                     list.add(searchModel);
                     i++;
@@ -159,6 +171,7 @@ public class SearchFriendsFragment extends Fragment {
         });
 
         searchableArrayList = list;
+
 
         mXMark.setOnClickListener(new OnClickListener() {
             @Override
@@ -188,18 +201,61 @@ public class SearchFriendsFragment extends Fragment {
             @SuppressLint("DefaultLocale")
             @Override
             public void afterTextChanged(Editable editable) {
+                searchByName = true;
                 String searchText = editable.toString().trim();
-                ArrayList<SearchModel> searchedArray = new ArrayList<SearchModel>();
+                final ArrayList<SearchModel> searchedArray = new ArrayList<SearchModel>();
                 for (SearchModel dm : searchableArrayList) {
-                    if (dm.getText().toLowerCase()
-                            .contains(searchText.toLowerCase())) {
-                        searchedArray.add(dm);
+                    if (mName.getText() == getString(R.string.material_icon_checked_full)) {
+                        if (dm.getText().toLowerCase()
+                                .contains(searchText.toLowerCase())) {
+                            searchedArray.add(dm);
+                        }
+                        searchByName = false;
+                    }
+                    if (mNativePlace.getText() == getString(R.string.material_icon_checked_full)) {
+                        if (dm.getNativeText().toLowerCase()
+                                .contains(searchText.toLowerCase())) {
+                            searchedArray.add(dm);
+                        }
+                        searchByName = false;
+                    }
+                    if (mAge.getText() == getString(R.string.material_icon_checked_full)) {
+                        if (dm.getAgeText().toLowerCase()
+                                .contains(searchText.toLowerCase())) {
+                            searchedArray.add(dm);
+                        }
+                        searchByName = false;
+                    }
+                    if (mHobbies.getText() == getString(R.string.material_icon_checked_full)) {
+                        if (dm.getHobbies().toLowerCase()
+                                .contains(searchText.toLowerCase())) {
+                            searchedArray.add(dm);
+                        }
+                        searchByName = false;
+                    }
+
+                    if (mHobbies.getText() == getString(R.string.material_icon_check_empty) &&
+                            mAge.getText() == getString(R.string.material_icon_check_empty) &&
+                            mNativePlace.getText() == getString(R.string.material_icon_check_empty)) {
+                        if (dm.getText().toLowerCase()
+                                .contains(searchText.toLowerCase())) {
+                            searchedArray.add(dm);
+                        }
                     }
                 }
                 if (searchText.isEmpty()) {
                     mListView.setAdapter(null);
                     mXMark.setText(R.string.fontello_x_mark);
                 } else {
+                    mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            SearchModel sm = searchedArray.get(i);
+                            Intent intent = new Intent(mActivity, ShowProfileActivity.class);
+                            intent.putExtra("userid", sm.getUserId());
+                            startActivity(intent);
+                        }
+                    });
                     mListView.setAdapter(new SearchAdapter(mActivity,
                             searchedArray));
                     mXMark.setText(R.string.fontello_x_mark_masked);
@@ -230,18 +286,18 @@ public class SearchFriendsFragment extends Fragment {
                     mNativePlace.setText(getString(R.string.material_icon_check_empty));
                 }
                 break;
-            case R.id.activity_search_bar_media_artist:
-                if (mArtist.getText() == getString(R.string.material_icon_check_empty)) {
-                    mArtist.setText(getString(R.string.material_icon_checked_full));
+            case R.id.activity_search_bar_age:
+                if (mAge.getText() == getString(R.string.material_icon_check_empty)) {
+                    mAge.setText(getString(R.string.material_icon_checked_full));
                 } else {
-                    mArtist.setText(getString(R.string.material_icon_check_empty));
+                    mAge.setText(getString(R.string.material_icon_check_empty));
                 }
                 break;
-            case R.id.activity_search_bar_media_genre:
-                if (mGenre.getText() == getString(R.string.material_icon_check_empty)) {
-                    mGenre.setText(getString(R.string.material_icon_checked_full));
+            case R.id.activity_search_bar_hobbies:
+                if (mHobbies.getText() == getString(R.string.material_icon_check_empty)) {
+                    mHobbies.setText(getString(R.string.material_icon_checked_full));
                 } else {
-                    mGenre.setText(getString(R.string.material_icon_check_empty));
+                    mHobbies.setText(getString(R.string.material_icon_check_empty));
                 }
                 break;
             case R.id.activity_search_bar_media_arrow:

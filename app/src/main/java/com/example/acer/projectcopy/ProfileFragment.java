@@ -41,6 +41,8 @@ public class ProfileFragment extends Fragment {
     private EditText statusEdit;
     private EditText nativePlaceEdit;
     private EditText usernameEdit;
+    private EditText ageEdit;
+    private EditText hobbiesEdit;
     private Button updateButton;
     private CircleImageView userProfileImage;
     private Activity mActivity;
@@ -61,6 +63,8 @@ public class ProfileFragment extends Fragment {
         statusEdit = (EditText) mActivity.findViewById(R.id.status_edit_l);
         nativePlaceEdit = (EditText) mActivity.findViewById(R.id.native_edit_l);
         usernameEdit = (EditText) mActivity.findViewById(R.id.name_edit_l);
+        ageEdit = (EditText) mActivity.findViewById(R.id.age_edit_l);
+        hobbiesEdit = (EditText) mActivity.findViewById(R.id.hobbies_edit_l);
         updateButton = (Button) mActivity.findViewById(R.id.update_button_l);
         userProfileImage = (CircleImageView) mActivity.findViewById(R.id.profile_pic_view_l);
 
@@ -79,6 +83,8 @@ public class ProfileFragment extends Fragment {
                 String image = dataSnapshot.child("user_image").getValue().toString();
                 String native_place = dataSnapshot.child("user_native_place").getValue().toString();
                 String thumb_image = dataSnapshot.child("user_thumb_image").getValue().toString();
+                String age = dataSnapshot.child("user_age").getValue().toString();
+                String hobbies = dataSnapshot.child("user_hobbies").getValue().toString();
 
                 if(!image.equals("default_image")) {
                      Picasso.with(mActivity).load(image).placeholder(R.mipmap.ic_account_circle_black_48dp).into(userProfileImage);
@@ -87,10 +93,10 @@ public class ProfileFragment extends Fragment {
                 usernameEdit.setText(name);
                 statusEdit.setText(status);
                 nativePlaceEdit.setText(native_place);
+                ageEdit.setText(age);
+                hobbiesEdit.setText(hobbies);
 
             }
-
-
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

@@ -1,0 +1,22 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.acer.projectcopy.ShowPlanFragment">
+
+    <!--<ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/ListViewStyle"
+        android:id="@+id/show_plan_listview"></ListView>-->
+    <com.example.acer.projectcopy.view.AnimatedExpandableListView
+        android:id="@+id/show_plan_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:childDivider="@color/material_light_yellow_600"
+        android:divider="@color/material_purple_500"
+        android:dividerHeight="4dp"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:textFilterEnabled="true"></com.example.acer.projectcopy.view.AnimatedExpandableListView>
+</FrameLayout>

@@ -1,6 +1,8 @@
 package com.example.acer.projectcopy;
 
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -14,7 +16,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuBuilder;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.acer.projectcopy.adapter.ParallaxNewsfeedAdapter;
+import com.example.acer.projectcopy.font.MaterialIconsTextView;
 import com.example.acer.projectcopy.font.RobotoTextView;
 import com.example.acer.projectcopy.model.DummyModel;
 import com.example.acer.projectcopy.util.ImageUtil;
@@ -51,16 +57,51 @@ public class HomeActivity extends AppCompatActivity {
     ListView mainContentList;
     RelativeLayout mainContentLayout;
     int itemid;
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    //Yes button clicked
+                    Toast.makeText(HomeActivity.this, "Delete User clicked", Toast.LENGTH_SHORT).show();
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null) {
+                        user.delete()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(HomeActivity.this, "User account deleted successfully", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(HomeActivity.this, StartActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(HomeActivity.this, "Deletion failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                    }
+
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    //No button clicked
+                    break;
+            }
+        }
+    };
     private FirebaseAuth mAuth;
     private FirebaseUser current_user;
     private DatabaseReference firebaseReference;
+    private DatabaseReference getFirebaseReference;
     private RobotoTextView navHeaderUserName;
     private RobotoTextView navHeaderUserEmail;
-
-
+    private ParallaxNewsfeedAdapter parallaxNewsfeedAdapter;
     private String user_email;
     private String image_path;
     private String name;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +109,13 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(HomeActivity.this));
+
+        progressDialog = new ProgressDialog(HomeActivity.this);
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Please wait......");
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(21, 91, 142)));
 
@@ -82,7 +130,6 @@ public class HomeActivity extends AppCompatActivity {
         navHeaderUserName = (RobotoTextView) headerView.findViewById(R.id.header_navigation_drawer_media_username);
         navHeaderUserEmail = (RobotoTextView) headerView.findViewById(R.id.header_navigation_drawer_media_email);
         final ImageView navHeaderUserImage = (ImageView) headerView.findViewById(R.id.header_navigation_drawer_media_image);
-        Toast.makeText(HomeActivity.this, headerView.toString() + " HEADER username:" + navHeaderUserName.getText(), Toast.LENGTH_LONG).show();
 
         mAuth = FirebaseAuth.getInstance();
         current_user = mAuth.getCurrentUser();
@@ -95,7 +142,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 image_path = dataSnapshot.child("user_image").getValue().toString();
                 name = dataSnapshot.child("user_name").getValue().toString();
-
             }
 
             @Override
@@ -113,38 +159,97 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.setBackgroundColor(color);
 
         navigationView.setBackgroundResource(R.drawable.background_media);
-        /*Intent intent = getIntent();
-        String jsondata = intent.getStringExtra("jsondata");
 
-        if(jsondata==null)
-        {
-            Toast.makeText(HomeActivity.this,"jsondata null",Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(HomeActivity.this,"jsondata not null",Toast.LENGTH_SHORT).show();
-        }*/
-
-        ArrayList<DummyModel> arrayList = new ArrayList<>();
+        final ArrayList<DummyModel> arrayList = new ArrayList<>();
+        final ArrayList<DummyModel> tmp = new ArrayList<>();
         arrayList.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/listviews/googlecards/travel/0.jpg", "Jane Smith", R.string.fontello_heart_empty));
         arrayList.add(new DummyModel(1, "http://pengaja.com/uiapptemplate/newphotos/listviews/googlecards/travel/1.jpg", "Jane Smith", R.string.fontello_heart_empty));
         arrayList.add(new DummyModel(2, "http://pengaja.com/uiapptemplate/newphotos/listviews/googlecards/travel/2.jpg", "Jane Smith", R.string.fontello_heart_empty));
-        mainContentList.setAdapter(new ParallaxNewsfeedAdapter(this, arrayList, false));
+
+
+        final DatabaseReference dr = FirebaseDatabase.getInstance().getReference().child("Users");
+        getFirebaseReference = FirebaseDatabase.getInstance().getReference().child("Posts");
+        getFirebaseReference.keepSynced(true);
+
+        getFirebaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot childDs : dataSnapshot.getChildren()) {
+                    final String id;
+                    final String image;
+                    id = childDs.child("authorId").getValue().toString();
+                    image = childDs.child("imagePath").getValue().toString();
+                    dr.addValueEventListener(new ValueEventListener() {
+                        String name = "";
+
+                        @Override
+                        public void onDataChange(DataSnapshot drDataSnapshot) {
+
+                            name = drDataSnapshot.child(id).child("user_name").getValue().toString();
+                            arrayList.add(new DummyModel(arrayList.size(), image, name, R.string.fontello_heart_empty));
+                            tmp.clear();
+                            for (int i = arrayList.size() - 1; i >= 0; i--) {
+
+                                tmp.add(arrayList.get(i));
+                            }
+                            parallaxNewsfeedAdapter.notifyDataSetChanged();
+                            progressDialog.dismiss();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        parallaxNewsfeedAdapter = new ParallaxNewsfeedAdapter(this, tmp, false);
+
+        mainContentList.setAdapter(parallaxNewsfeedAdapter);
+
+
 
         final ProfileFragment profileFragment = new ProfileFragment();
-        final FindFriendsFragment findFriendsFragment = new FindFriendsFragment();
         final SearchFriendsFragment searchFriendsFragment = new SearchFriendsFragment();
         final FacebookFriendsListFragment facebookFriendsListFragment = new FacebookFriendsListFragment();
+        final CreatePlanFragment createPlanFragment = new CreatePlanFragment();
+        final ShowPlanFragment showPlanFragment = new ShowPlanFragment();
+        final CreatePostFragment createPostFragment = new CreatePostFragment();
+        final MyPlansFragment myPlansFragment = new MyPlansFragment();
 
         final Menu menu = navigationView.getMenu();
 
 
-        String menu_items[] = {"Profile", "Newsfeed", "Facebook Friends", "Friends", "Invite Friends", "Add Account", "Privacy Settings",
-                "Your Plan", "Groups"};
+        String menu_items[] = {"Profile", "Newsfeed", "Facebook Friends", "Search Friends", "Create Plans", "Show Plans", "Create Post", "My Plans"};
+        String menu_icons[] = new String[8];
+        menu_icons[0] = getString(R.string.material_icon_account);
+        menu_icons[1] = getString(R.string.drawer_icon_newsfeed);
+        menu_icons[2] = getString(R.string.drawer_icon_facebook_friends);
+        menu_icons[3] = getString(R.string.drawer_icon_friends);
+        menu_icons[4] = getString(R.string.drawer_icon_create_plans);
+        menu_icons[5] = getString(R.string.drawer_icon_show_plans);
+        menu_icons[6] = getString(R.string.drawer_icon_create_post);
+        menu_icons[7] = getString(R.string.drawer_icon_show_plans);
+
         int i = 0;
         View child_view[] = new View[menu_items.length];
         while (i < menu_items.length) {
             final MenuItem item = menu.getItem(i);
             child_view[i] = item.getActionView();
+
+            //String TAG = "Tag Message";
+            Log.d("SDEBUG", i + "This is tag no:" + child_view[i].toString());
+            MaterialIconsTextView mv = (MaterialIconsTextView) child_view[i].findViewById(R.id.list_item_navigation_drawer_media_icon);
+            mv.setText(menu_icons[i]);
             RobotoTextView tv = (RobotoTextView) child_view[i].findViewById(R.id.list_item_navigation_drawer_media_title);
             tv.setText(menu_items[i]);
             child_view[i].setOnClickListener(new View.OnClickListener() {
@@ -163,11 +268,11 @@ public class HomeActivity extends AppCompatActivity {
                 super.onDrawerOpened(drawerView);
                 mainContentLayout.setVisibility(View.INVISIBLE);
                 navHeaderUserName.setText(name);
+                while (image_path.isEmpty()) {
+
+                }
                 if (!image_path.equals("default_image")) {
                     ImageUtil.displayRoundImage(navHeaderUserImage, image_path, null);
-                    //Picasso.with(HomeActivity.this).load(image_path).placeholder(R.mipmap.ic_account_circle_black_48dp).into(navHeaderUserImage);
-                } else {
-                    ImageUtil.displayRoundImage(navHeaderUserImage, "@string/default_image_url", null);
                 }
                 navHeaderUserEmail.setText(user_email);
             }
@@ -207,12 +312,26 @@ public class HomeActivity extends AppCompatActivity {
                     mainContentLayout.removeAllViews();
                     mainContentLayout.addView(mainContentList);
                     mainContentList.setVisibility(View.VISIBLE);
+                } else if (item.getItemId() == R.id.plan_create_navigation_item) {
+                    mainContentList.setVisibility(View.INVISIBLE);
+                    ft = getFragmentManager().beginTransaction().replace(R.id.home_main_layout, createPlanFragment);
+                    ft.commit();
+                } else if (item.getItemId() == R.id.plan_show_navigation_item) {
+                    mainContentList.setVisibility(View.INVISIBLE);
+                    ft = getFragmentManager().beginTransaction().replace(R.id.home_main_layout, showPlanFragment);
+                    ft.commit();
+                } else if (item.getItemId() == R.id.post_create_navigation_item) {
+                    mainContentList.setVisibility(View.INVISIBLE);
+                    ft = getFragmentManager().beginTransaction().replace(R.id.home_main_layout, createPostFragment);
+                    ft.commit();
+                } else if (item.getItemId() == R.id.my_plans_navigation_item) {
+                    mainContentList.setVisibility(View.INVISIBLE);
+                    ft = getFragmentManager().beginTransaction().replace(R.id.home_main_layout, myPlansFragment);
+                    ft.commit();
                 }
                 return true;
             }
         });
-
-
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -224,10 +343,13 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreateOptionsMenu(menu);
 
         getMenuInflater().inflate(R.menu.main_menu,menu);
+        if (menu instanceof MenuBuilder) {
+            MenuBuilder m = (MenuBuilder) menu;
+            m.setOptionalIconsVisible(true);
+        }
 
         return true;
     }
-
 
     @Override
     public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
@@ -244,14 +366,10 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
-        if (drawerToggle.onOptionsItemSelected(item))
-        {
+        if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        if (item.getItemId() == R.id.menu_link_fb)
-        {
 
-        }
         if (item.getItemId() == R.id.menu_logout_fb) {
             try {
                 FirebaseAuth.getInstance().signOut();
@@ -287,30 +405,13 @@ public class HomeActivity extends AppCompatActivity {
             return true;
         }
         if (item.getItemId() == R.id.menu_delete_user) {
-            Toast.makeText(HomeActivity.this, "Delete User clicked", Toast.LENGTH_SHORT).show();
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user != null) {
-                user.delete()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(HomeActivity.this, "User account deleted successfully", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(HomeActivity.this, StartActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(HomeActivity.this, "Deletion failed", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
+            AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+            builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
             return true;
-        } else {
-            return false;
         }
-
+        return true;
     }
+
 
 }

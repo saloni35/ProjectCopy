@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.example.acer.projectcopy.font.RobotoTextView
+        android:id="@+id/show_plan_header_title"
+        style="@style/TextViewAppearance.Display3" />
+
+    <com.example.acer.projectcopy.font.RobotoTextView
+        android:id="@+id/show_plan_header_description"
+        style="@style/TextViewAppearance.Headline3" />
+
+</LinearLayout>

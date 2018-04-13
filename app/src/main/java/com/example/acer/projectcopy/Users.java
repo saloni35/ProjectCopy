@@ -11,6 +11,8 @@ public class Users {
     private String user_image;
     private String user_thumb_image;
     private String user_native_place;
+    private Long user_age;
+    private String user_hobbies;
 
     public Users()
     {
@@ -62,6 +64,22 @@ public class Users {
 
     public void setUser_native_place(String user_native_place) {
         this.user_native_place = user_native_place;
+    }
+
+    public Long getUser_age() {
+        return user_age;
+    }
+
+    public void setUser_age(Long user_age) {
+        this.user_age = user_age;
+    }
+
+    public String getUser_hobbies() {
+        return user_hobbies;
+    }
+
+    public void setUser_hobbies(String user_hobbies) {
+        this.user_hobbies = user_hobbies;
     }
 }
 
